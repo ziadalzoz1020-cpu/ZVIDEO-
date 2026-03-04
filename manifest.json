@@ -1,19 +1,21 @@
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open('zvideo-cache').then((cache) => {
-      return cache.addAll([
-        './',
-        './index.html',
-        // أضف ملفات أخرى مثل CSS، JS، إلخ إذا كانت موجودة
-      ]);
-    })
-  );
-});
-
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
-  );
-});
+{
+  "name": "ZVIDEO",
+  "short_name": "ZVIDEO",
+  "icons": [
+    {
+      "src": "favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "fullscreen",
+  "theme_color": "#050505",
+  "background_color": "#050505",
+  "orientation": "any"
+}
