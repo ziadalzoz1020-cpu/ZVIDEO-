@@ -13,6 +13,15 @@
     <!-- إضافة دعم لـ favicon.png ليعمل كأيقونة في المتصفح -->
     <link rel="icon" type="image/png" href="favicon.png">
     
+    <!-- إضافة ملف الـ manifest لجعلها تطبيق ويب تقدمي (PWA) وفتحها في وضع ملء الشاشة -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- دعم وضع ملء الشاشة للتطبيقات المضافة إلى الشاشة الرئيسية -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#050505"> <!-- لون الثيم للشريط العلوي -->
+
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&family=Cinzel:wght@800&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -260,6 +269,17 @@
             video.className = "";
             video.style.transform = "rotate(0deg)";
             rot = 0;
+        }
+
+        // دعم PWA: تسجيل Service Worker إذا كان موجوداً (اختياري للوضع الأساسي، لكن يساعد في التثبيت)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    console.log('Service Worker registered!', reg);
+                }).catch(err => {
+                    console.log('Service Worker registration failed:', err);
+                });
+            });
         }
     </script>
 </body>
